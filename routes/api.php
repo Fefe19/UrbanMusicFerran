@@ -89,8 +89,4 @@ Route::post('updateUserAdmin/{id}', [UserController::class, 'editarUsuariosAdmin
 Route::get('editUser/{id}', [UserController::class, 'editUserAdmin']);
 
 Route::get('roles', [UserController::class, 'getRoles']);
-
-
-
-
  
