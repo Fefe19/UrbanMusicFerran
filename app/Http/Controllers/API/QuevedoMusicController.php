@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Canciones;
+use App\Models\Categoria_Canciones;
 
 class QuevedoMusicController extends Controller
 {
@@ -12,6 +13,18 @@ class QuevedoMusicController extends Controller
     public function canciones()
     {
         $canciones = Canciones::all()->toArray();
+        return response()->json($canciones);
+    }
+
+    public function canciones_categoria()
+    {
+        $canciones_categoria = Categoria_Canciones::all()->toArray();
+        return response()->json($canciones_categoria);
+    }
+
+    public function getCancionesByCategoria($id_categoria)
+    {
+        $canciones = Canciones::where('id_categoria_cancion', $id_categoria)->get();
         return response()->json($canciones);
     }
 
