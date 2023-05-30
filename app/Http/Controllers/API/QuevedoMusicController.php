@@ -27,12 +27,6 @@ class QuevedoMusicController extends Controller
         $canciones = Canciones::where('id_categoria_cancion', $id_categoria)->get();
         return response()->json($canciones);
     }
-
-    public function categoria($id_categoria)
-    {
-        $categoria = Categoria_Canciones::find($id_categoria);
-        return response()->json($categoria);
-    }
     
     public function agregarCanciones(Request $request){
 

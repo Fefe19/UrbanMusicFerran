@@ -7,7 +7,7 @@
                 <router-link :to="{ name: 'Canciones', params: { id_categoria: cancion_categoria.id } }" >
                   <img class="card-img-top3 image" v-bind:src="'/img/Artistas/' + cancion_categoria.image" alt="Portada de la canción">
                 </router-link>
-                  <div class="card-body">
+                  <div class="card-body d-flex justify-content-between">
                       <h5 class="card-title">{{ cancion_categoria.name }}</h5>
                       <router-link :to="{ name: 'Canciones', params: { id_categoria: cancion_categoria.id } }" class="mx-2">
                         <div class="play" aria-label="play"></div>
