@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Pedido;
+use App\Models\Categorias;
 use Illuminate\Support\Carbon;
 
 class ProductosController extends Controller
@@ -13,6 +14,24 @@ class ProductosController extends Controller
     public function productos()
     {
         $productos = Producto::all()->toArray();
+        return response()->json($productos);
+    }
+
+    public function categoria()
+    {
+        $categoria = Categorias::all()->toArray();
+        return response()->json($categoria);
+    }
+
+    public function getProductosByCategoria($id_categoria)
+    {
+        $productos = Producto::where('id_categoria', $id_categoria)->get();
+        return response()->json($productos);
+    }
+
+    public function getProductosCategoria($id_categoria)
+    {
+        $productos = Producto::where('id_categoria', $id_categoria)->get();
         return response()->json($productos);
     }
 

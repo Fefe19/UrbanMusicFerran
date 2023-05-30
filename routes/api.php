@@ -29,6 +29,10 @@ Route::post('pedidos',[ProductosController::class,'pedidos']);
 Route::get('canciones_categoria', [QuevedoMusicController::class, 'canciones_categoria']);
 
 Route::get('/canciones_categoria/{id_categoria}', [QuevedoMusicController::class, 'getCancionesByCategoria']);
+
+Route::get('categoria', [ProductosController::class, 'categoria']);
+
+Route::get('/categoria/{id_categoria}', [ProductosController::class, 'getProductosByCategoria']);
     
 Route::get('badbunny', [ProductosController::class, 'index']);
 

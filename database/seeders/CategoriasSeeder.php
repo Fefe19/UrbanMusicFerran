@@ -13,9 +13,9 @@ class CategoriasSeeder extends Seeder
     public function run(): void
     {
         $categorias = [
-            ['id'=>'1','name'=>'ELADIO','image'=>'IMAGEN','created_at'=>null,'updated_at'=>null],
-            ['id'=>'2','name'=>'BADBUNNY','image'=>'IMAGEN','created_at'=>null,'updated_at'=>null],
-            ['id'=>'3','name'=>'ROSALIA','image'=>'IMAGEN','created_at'=>null,'updated_at'=>null],
+            ['id'=>'1','name'=>'Eladio Carrión','image'=>'eladio.webp','created_at'=>null,'updated_at'=>null],
+            ['id'=>'2','name'=>'Bad Bunny','image'=>'badbunny.webp','created_at'=>null,'updated_at'=>null],
+            ['id'=>'3','name'=>'Rosalía','image'=>'rosalia.webp','created_at'=>null,'updated_at'=>null],
         ];
 
         Categorias::insert($categorias);

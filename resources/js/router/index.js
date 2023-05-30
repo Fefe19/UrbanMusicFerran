@@ -25,6 +25,7 @@ import FormularioAñadirUsuarios from '../components/FormularioAñadirUsuarios.v
 import AdminUsers from '../components/AdminUsers.vue';
 import FormularioEditarUsuarios from '../components/FormularioEditarUsuarios.vue';
 import Canciones from '../components/Canciones.vue';
+import Productos from '../components/Productos.vue';
 
 export const routes = [{
         name: 'home',
@@ -167,6 +168,11 @@ export const routes = [{
         name: 'Canciones',
         path: '/canciones/:id_categoria',
         component: Canciones
+    },
+    {
+        name: 'Productos',
+        path: '/productos/:id_categoria',
+        component: Productos
     },
 
 ];
