@@ -8,9 +8,6 @@ import Privacidad from '../components/Privacidad.vue';
 import Cookies from '../components/Cookies.vue';
 import Aviso_Legal from '../components/Aviso_Legal.vue';
 import Merchandising from '../components/Merchandising.vue';
-import Merchandising_Rosalia from '../components/Merchandising_Rosalia.vue';
-import Merchandising_BadBunny from '../components/Merchandising_BadBunny.vue';
-import Merchandising_EladioCarrión from '../components/Merchandising_EladioCarrión.vue';
 import Carrito from '../components/Carrito.vue';
 import ConfirmaciónCompra from '../components/ConfirmaciónCompra.vue';
 import AdminCanciones from '../components/AdminCanciones.vue';
@@ -71,21 +68,6 @@ export const routes = [{
         name: 'merchandising',
         path: '/merchandising',
         component: Merchandising
-    },
-    {
-        name: 'merchandising_rosalia',
-        path: '/merchandising/Rosalia',
-        component: Merchandising_Rosalia
-    },
-    {
-        name: 'merchandising_badbunny',
-        path: '/merchandising/BadBunny',
-        component: Merchandising_BadBunny
-    },
-    {
-        name: 'merchandising_eladiocarrion',
-        path: '/merchandising/EladioCarrion',
-        component: Merchandising_EladioCarrión
     },
     {
         name: 'carrito',

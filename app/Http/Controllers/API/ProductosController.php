@@ -11,12 +11,6 @@ use Illuminate\Support\Carbon;
 
 class ProductosController extends Controller
 {
-    public function productos()
-    {
-        $productos = Producto::all()->toArray();
-        return response()->json($productos);
-    }
-
     public function categoria()
     {
         $categoria = Categorias::all()->toArray();
@@ -26,30 +20,6 @@ class ProductosController extends Controller
     public function getProductosByCategoria($id_categoria)
     {
         $productos = Producto::where('id_categoria', $id_categoria)->get();
-        return response()->json($productos);
-    }
-
-    public function getProductosCategoria($id_categoria)
-    {
-        $productos = Producto::where('id_categoria', $id_categoria)->get();
-        return response()->json($productos);
-    }
-
-    public function index()
-    {
-        $productos = Producto::where('id_categoria', 2)->get();
-        return response()->json($productos);
-    }
-
-    public function rosalia()
-    {
-        $productos = Producto::where('id_categoria', 3)->get();
-        return response()->json($productos);
-    }
-
-    public function eladio()
-    {
-        $productos = Producto::where('id_categoria', 1)->get();
         return response()->json($productos);
     }
 

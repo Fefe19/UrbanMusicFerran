@@ -22,8 +22,6 @@ Route::post('login',[UserController::class,'login']);
 Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(['auth:sanctum']);
 
-Route::get('productos',[ProductosController::class,'productos']);
-
 Route::post('pedidos',[ProductosController::class,'pedidos']);
 
 Route::get('canciones_categoria', [QuevedoMusicController::class, 'canciones_categoria']);
@@ -33,12 +31,6 @@ Route::get('/canciones_categoria/{id_categoria}', [QuevedoMusicController::class
 Route::get('categoria', [ProductosController::class, 'categoria']);
 
 Route::get('/categoria/{id_categoria}', [ProductosController::class, 'getProductosByCategoria']);
-    
-Route::get('badbunny', [ProductosController::class, 'index']);
-
-Route::get('rosalia', [ProductosController::class, 'rosalia']);
-
-Route::get('eladio', [ProductosController::class, 'eladio']);
 
 Route::get('carrito', [ProductosController::class, 'obtenerProductos']);
 
