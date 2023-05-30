@@ -28,21 +28,10 @@ Route::post('pedidos',[ProductosController::class,'pedidos']);
 
 Route::get('canciones_categoria', [QuevedoMusicController::class, 'canciones_categoria']);
 
-Route::get('/categorias/{id_categoria}/canciones', [QuevedoMusicController::class, 'getCancionesByCategoria']);
+Route::get('/categoria/{id_categoria}', [QuevedoMusicController::class, 'categoria']);
+Route::get('/canciones_categoria/{id_categoria}', [QuevedoMusicController::class, 'getCancionesByCategoria']);
 
 Route::get('canciones', [QuevedoMusicController::class, 'canciones']);
-
-Route::get('Quevedo', [QuevedoMusicController::class, 'index']);
-
-Route::get('Bad Bunny', [QuevedoMusicController::class, 'badbunny']);
-
-Route::get('Shakira', [QuevedoMusicController::class, 'shakira']);
-
-Route::get('Rosalia', [QuevedoMusicController::class, 'rosalia']);
-
-Route::get('Eladio', [QuevedoMusicController::class, 'eladio']);
-
-Route::get('Karol', [QuevedoMusicController::class, 'karol']);
     
 Route::get('badbunny', [ProductosController::class, 'index']);
 

@@ -8,12 +8,6 @@ import Privacidad from '../components/Privacidad.vue';
 import Cookies from '../components/Cookies.vue';
 import Aviso_Legal from '../components/Aviso_Legal.vue';
 import Merchandising from '../components/Merchandising.vue';
-import Canciones_Rosalia from '../components/Canciones_Rosalia.vue';
-import Canciones_Quevedo from '../components/Canciones_Quevedo.vue';
-import Canciones_EladioCarrión from '../components/Canciones_EladioCarrión.vue';
-import Canciones_KarolG from '../components/Canciones_KarolG.vue';
-import Canciones_BadBunny from '../components/Canciones_BadBunny.vue';
-import Canciones_Shakira from '../components/Canciones_Shakira.vue';
 import Merchandising_Rosalia from '../components/Merchandising_Rosalia.vue';
 import Merchandising_BadBunny from '../components/Merchandising_BadBunny.vue';
 import Merchandising_EladioCarrión from '../components/Merchandising_EladioCarrión.vue';
@@ -76,35 +70,6 @@ export const routes = [{
         name: 'merchandising',
         path: '/merchandising',
         component: Merchandising
-    },
-    {
-        name: 'canciones_rosalia',
-        path: '/categoria/Rosalia',
-        component: Canciones_Rosalia
-    }, {
-        name: 'canciones_quevedo',
-        path: '/categoria/Quevedo',
-        component: Canciones_Quevedo
-    },
-    {
-        name: 'canciones_eladiocarrion',
-        path: '/categoria/EladioCarrion',
-        component: Canciones_EladioCarrión
-    },
-    {
-        name: 'canciones_karolg',
-        path: '/categoria/KarolG',
-        component: Canciones_KarolG
-    },
-    {
-        name: 'canciones_badbunny',
-        path: '/categoria/BadBunny',
-        component: Canciones_BadBunny
-    },
-    {
-        name: 'canciones_shakira',
-        path: '/categoria/Shakira',
-        component: Canciones_Shakira
     },
     {
         name: 'merchandising_rosalia',
@@ -186,7 +151,6 @@ export const routes = [{
     },
 
     {
-
         name: 'formularioañadirusuarios',
         path: '/formularioaddusuarios',
         component: FormularioAñadirUsuarios
@@ -201,7 +165,7 @@ export const routes = [{
 
     {
         name: 'Canciones',
-        path: '/categoria/Canciones/:id_categoria',
+        path: '/canciones/:id_categoria',
         component: Canciones
     },
 
