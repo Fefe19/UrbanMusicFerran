@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid mt-5 mb-5">
-      <h3 class="mb-4">Bad Bunny</h3>
+      <h3 class="mb-4">Productos</h3>
       <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <strong>{{ strSuccess }}</strong>
