@@ -30,6 +30,8 @@
       return {
         productos: [],
         productosSeleccionados: [],
+        strSuccess: '',
+        strError: '',
       };
     },
   
