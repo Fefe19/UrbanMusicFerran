@@ -77,7 +77,7 @@ data() {
         }
 
       this.$axios.get('/sanctum/csrf-cookie').then(response => {
-          this.$axios.get('/api/productos')
+          this.$axios.get('/api/productosAdmin')
               .then(response => {
                   this.productos = response.data;
               })
@@ -99,10 +99,10 @@ data() {
 },
 methods: {
   eliminarProducto(id) {
-  this.$axios.delete('/api/deleteProducto/' + id)
+  this.$axios.delete('/api/productosAdmin/delete/' + id)
     .then(response => {
 
-      this.$axios.get('/api/productos')
+      this.$axios.get('/api/productosAdmin')
         .then(response => {
           this.productos = response.data;
         })
@@ -113,7 +113,7 @@ methods: {
     })
     .catch(error => {
 
-      this.$axios.get('/api/productos')
+      this.$axios.get('/api/productosAdmin')
         .then(response => {
           this.productos = response.data;
         })

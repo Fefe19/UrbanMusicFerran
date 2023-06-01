@@ -82,7 +82,7 @@ export default {
         }
         
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/canciones')
+            this.$axios.get('/api/cancionesAdmin')
                 .then(response => {
                     this.canciones = response.data;
                 })
@@ -104,10 +104,10 @@ export default {
 },
   methods: {
     eliminarCancion(id) {
-    this.$axios.delete('/api/delete/' + id)
+    this.$axios.delete('/api/cancionesAdmin/delete/' + id)
       .then(response => {
 
-        this.$axios.get('/api/canciones')
+        this.$axios.get('/api/cancionesAdmin')
           .then(response => {
             this.canciones = response.data;
           })

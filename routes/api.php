@@ -40,33 +40,32 @@ Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
 });
 
 Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('addProducto', [ProductosController::class, 'agregarProductos']);
-    Route::delete('deleteProducto/{id}', [ProductosController::class, 'delete']);
-    Route::post('updateProducto/{id}', [ProductosController::class, 'update']);
-    Route::get('editProducto/{id}', [ProductosController::class, 'edit']);
-});
-
-Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
 
     Route::post('updateUsuario/{id}', [UserController::class,'update']);
     Route::delete('deleteUsuario/{id}', [UserController::class,'delete']);
 
 });
 
-Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
+//Página canciones administrador
+Route::group(['prefix' => 'cancionesAdmin', 'middleware' => 'auth:sanctum'], function () {
 
-    Route::post('addCanciones', [QuevedoMusicController::class, 'agregarCanciones']);
+    Route::get('/', [QuevedoMusicController::class, 'canciones']);
+    Route::post('add', [QuevedoMusicController::class, 'agregarCanciones']);
     Route::delete('delete/{id}', [QuevedoMusicController::class,'delete']);
     Route::post('update/{id}', [QuevedoMusicController::class,'update']);
     Route::get('edit/{id}', [QuevedoMusicController::class,'edit']);
    
 });
 
+//Página productos administrador
+Route::group(['prefix' => 'productosAdmin', 'middleware' => 'auth:sanctum'], function () {
 
-Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
-    
-    Route::get('canciones', [QuevedoMusicController::class, 'canciones']);
-    Route::get('productos',[ProductosController::class,'productos']);
+    Route::get('/',[ProductosController::class,'productos']);
+    Route::post('add', [ProductosController::class, 'agregarProductos']);
+    Route::delete('delete/{id}', [ProductosController::class, 'delete']);
+    Route::post('update/{id}', [ProductosController::class, 'update']);
+    Route::get('edit/{id}', [ProductosController::class, 'edit']);
+
 });
 
 //Página usuario administrador

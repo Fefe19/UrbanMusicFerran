@@ -81,13 +81,13 @@ export const routes = [{
     },
     {
         name: 'admincanciones',
-        path: '/admincanciones',
+        path: '/cancionesAdmin',
         component: AdminCanciones
     },
     {
 
         name: 'adminproductos',
-        path: '/adminproductos',
+        path: '/productosAdmin',
         component: AdminProductos
     },
     {
@@ -105,25 +105,25 @@ export const routes = [{
     {
 
         name: 'formularioañadircanciones',
-        path: '/formularioaddcanciones',
+        path: '/cancionesAdmin/add',
         component: FormularioAñadirCanciones
     },
     {
 
         name: 'formularioañadirproductos',
-        path: '/formularioaddproductos',
+        path: '/productosAdmin/add',
         component: FormularioAñadirProductos
     },
     {
 
         name: 'formularioeditarcanciones',
-        path: '/formularioeditarcanciones',
+        path: '/cancionesAdmin/edit',
         component: FormularioEditarCanciones
     },
     {
 
         name: 'formularioeditarproductos',
-        path: '/formularioeditarproductos',
+        path: '/productosAdmin/edit',
         component: FormularioEditarProductos
     },
     {

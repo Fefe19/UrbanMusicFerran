@@ -35,10 +35,10 @@
                                     <router-link to="/miperfil" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra">Ver Mi Perfil</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/admincanciones" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Canciones</router-link>
+                                    <router-link to="/cancionesAdmin" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Canciones</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/adminproductos" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Productos</router-link>
+                                    <router-link to="/productosAdmin" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Productos</router-link>
                                 </li>
                                 <li class="nav-item">
                                     <router-link to="/userAdmin" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra" v-if="hasUserRole('accederUserAdmin')">Administrador Usuarios</router-link>
@@ -63,10 +63,10 @@
                                     <router-link to="/miperfil" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra">Ver Mi Perfil</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/admincanciones" class="nav-item nav-link mt-1 ms-3 mb-2 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Canciones</router-link>
+                                    <router-link to="/cancionesAdmin" class="nav-item nav-link mt-1 ms-3 mb-2 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Canciones</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/adminproductos" class="nav-item nav-link mt-1 ms-3 mb-2 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Productos</router-link>
+                                    <router-link to="/productosAdmin" class="nav-item nav-link mt-1 ms-3 mb-2 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Productos</router-link>
                                 </li>
                                 <li class="nav-item">
                                     <router-link to="/userAdmin" class="nav-item nav-link mt-1 ms-3 mb-2 fw-bold tamaño_letra" v-if="hasUserRole('accederUserAdmin')">Administrador Usuarios</router-link>
