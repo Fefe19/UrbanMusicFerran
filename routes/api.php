@@ -23,9 +23,10 @@ Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(['auth:sanctum']);
 
 
-
 Route::get('canciones_categoria', [QuevedoMusicController::class, 'canciones_categoria']);
 Route::get('/canciones_categoria/{id_categoria}', [QuevedoMusicController::class, 'getCancionesByCategoria']);
+
+
 
 Route::get('categoria', [ProductosController::class, 'categoria']);
 Route::get('/categoria/{id_categoria}', [ProductosController::class, 'getProductosByCategoria']);
@@ -61,18 +62,21 @@ Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
    
 });
 
+
 Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('usuariosAdmin', [UserController::class,'usuarios']);
+    
     Route::get('canciones', [QuevedoMusicController::class, 'canciones']);
     Route::get('productos',[ProductosController::class,'productos']);
 });
 
-Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
+//Página usuario administrador
+Route::group(['prefix' => 'userAdmin', 'middleware' => 'auth:sanctum'], function () {
 
-    Route::delete('deleteUsuarioAdmin/{id}', [UserController::class,'deleteUsuarioAdmin']);
-    Route::post('updateUserAdmin/{id}', [UserController::class, 'editarUsuariosAdmin']);
-    Route::post('addUsuarioAdmin', [UserController::class, 'agregarUsuariosAdmin']);
-    Route::get('editUser/{id}', [UserController::class, 'editUserAdmin']);
+    Route::get('/', [UserController::class,'usuarios']);
+    Route::delete('delete/{id}', [UserController::class,'deleteUsuarioAdmin']);
+    Route::post('update/{id}', [UserController::class, 'editarUsuariosAdmin']);
+    Route::post('add', [UserController::class, 'agregarUsuariosAdmin']);
+    Route::get('edit/{id}', [UserController::class, 'editUserAdmin']);
     Route::get('roles', [UserController::class, 'getRoles']);
 
 });

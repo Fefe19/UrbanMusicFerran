@@ -129,20 +129,19 @@ export const routes = [{
     {
 
         name: 'adminusers',
-        path: '/adminusers',
+        path: '/userAdmin',
         component: AdminUsers
     },
 
     {
         name: 'formularioañadirusuarios',
-        path: '/formularioaddusuarios',
+        path: '/userAdmin/add',
         component: FormularioAñadirUsuarios
     },
 
     {
-
         name: 'formularioeditarusuarios',
-        path: '/formularioeditarusuarios',
+        path: '/userAdmin/edit',
         component: FormularioEditarUsuarios
     },
 

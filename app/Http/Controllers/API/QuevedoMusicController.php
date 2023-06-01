@@ -10,6 +10,11 @@ use App\Models\Categoria_Canciones;
 class QuevedoMusicController extends Controller
 {
 
+    public function pagina_principal()
+    {
+        // Lógica para mostrar la página principal
+        return view('home');
+    }
     public function canciones()
     {
         $canciones = Canciones::all()->toArray();
