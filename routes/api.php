@@ -30,27 +30,29 @@ Route::get('/canciones_categoria/{id_categoria}', [QuevedoMusicController::class
 Route::get('categoria', [ProductosController::class, 'categoria']);
 Route::get('/categoria/{id_categoria}', [ProductosController::class, 'getProductosByCategoria']);
 
-Route::get('carrito', [ProductosController::class, 'obtenerProductos']);
-Route::get('precioTotal', [ProductosController::class, 'obtenerPrecioTotal']);
-Route::post('guardar-productos-en-session', [\App\Http\Controllers\API\ProductosController::class, 'guardarProductosSeleccionados']);
-Route::delete('eliminar/{id}', [ProductosController::class,'eliminarProductos']);
-Route::post('pedidos',[ProductosController::class,'pedidos']);
+Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('carrito', [ProductosController::class, 'obtenerProductos']);
+    Route::get('precioTotal', [ProductosController::class, 'obtenerPrecioTotal']);
+    Route::post('guardar-productos-en-session', [\App\Http\Controllers\API\ProductosController::class, 'guardarProductosSeleccionados']);
+    Route::delete('eliminar/{id}', [ProductosController::class,'eliminarProductos']);
+    Route::post('pedidos',[ProductosController::class,'pedidos']);
+});
 
-Route::group(['prefix' => 'productosAdmin', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
     Route::post('addProducto', [ProductosController::class, 'agregarProductos']);
     Route::delete('deleteProducto/{id}', [ProductosController::class, 'delete']);
     Route::post('updateProducto/{id}', [ProductosController::class, 'update']);
     Route::get('editProducto/{id}', [ProductosController::class, 'edit']);
 });
 
-Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
 
     Route::post('updateUsuario/{id}', [UserController::class,'update']);
     Route::delete('deleteUsuario/{id}', [UserController::class,'delete']);
 
 });
 
-Route::group(['prefix' => 'cancionesAdmin', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
 
     Route::post('addCanciones', [QuevedoMusicController::class, 'agregarCanciones']);
     Route::delete('delete/{id}', [QuevedoMusicController::class,'delete']);
@@ -59,13 +61,14 @@ Route::group(['prefix' => 'cancionesAdmin', 'middleware' => 'auth:sanctum'], fun
    
 });
 
-Route::group(['prefix' => 'paginasAdmin', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
     Route::get('usuariosAdmin', [UserController::class,'usuarios']);
     Route::get('canciones', [QuevedoMusicController::class, 'canciones']);
     Route::get('productos',[ProductosController::class,'productos']);
 });
 
-Route::group(['prefix' => 'usersAdmin', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
+
     Route::delete('deleteUsuarioAdmin/{id}', [UserController::class,'deleteUsuarioAdmin']);
     Route::post('updateUserAdmin/{id}', [UserController::class, 'editarUsuariosAdmin']);
     Route::post('addUsuarioAdmin', [UserController::class, 'agregarUsuariosAdmin']);

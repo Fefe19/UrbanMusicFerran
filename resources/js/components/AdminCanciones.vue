@@ -130,22 +130,22 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
   if (!window.Laravel.isLoggedin) {
-    window.location.href = "/";
+    next('/'); // Redirigir al usuario a la página de inicio si no está logueado
   } else {
-    let canAccesUser = false;
+    let canAccessUser = false;
 
-    // Bucle para comprobar si existe el rol 'editar' 'eliminar' o 'añadir'
+    // Bucle para comprobar si existe el rol 'editar', 'eliminar' o 'añadir'
     for (let role of window.Laravel.user.roles) {
-      if (role.rol === 'accederAdmin') {
-        canAccesUser = true;
+      if (role.rol === 'editar' || role.rol === 'eliminar' || role.rol === 'añadir') {
+        canAccessUser = true;
+        break; // Salir del bucle si se encuentra un rol válido
       }
-
     }
 
-    if (canAccesUser) {
-      next();
+    if (canAccessUser) {
+      next(); // Permitir el acceso a la página actual
     } else {
-      next('/');
+      next('/'); // Redirigir al usuario a la página de inicio si no tiene los roles adecuados
     }
   }
 }
