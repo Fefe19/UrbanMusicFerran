@@ -22,16 +22,17 @@ Route::post('login',[UserController::class,'login']);
 Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(['auth:sanctum']);
 
-
+//Categoria de canciones
 Route::get('canciones_categoria', [QuevedoMusicController::class, 'canciones_categoria']);
 Route::get('/canciones_categoria/{id_categoria}', [QuevedoMusicController::class, 'getCancionesByCategoria']);
 
-
-
+//Categoria de productos
 Route::get('categoria', [ProductosController::class, 'categoria']);
 Route::get('/categoria/{id_categoria}', [ProductosController::class, 'getProductosByCategoria']);
 
-Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
+
+//Carrito 
+Route::group(['prefix' => 'productos', 'middleware' => 'auth:sanctum'], function () {
     Route::get('carrito', [ProductosController::class, 'obtenerProductos']);
     Route::get('precioTotal', [ProductosController::class, 'obtenerPrecioTotal']);
     Route::post('guardar-productos-en-session', [\App\Http\Controllers\API\ProductosController::class, 'guardarProductosSeleccionados']);
@@ -39,10 +40,11 @@ Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
     Route::post('pedidos',[ProductosController::class,'pedidos']);
 });
 
-Route::group(['prefix' => '/', 'middleware' => 'auth:sanctum'], function () {
+//Página perfil usuario
+Route::group(['prefix' => 'perfilUsuario', 'middleware' => 'auth:sanctum'], function () {
 
-    Route::post('updateUsuario/{id}', [UserController::class,'update']);
-    Route::delete('deleteUsuario/{id}', [UserController::class,'delete']);
+    Route::post('update/{id}', [UserController::class,'update']);
+    Route::delete('delete/{id}', [UserController::class,'delete']);
 
 });
 

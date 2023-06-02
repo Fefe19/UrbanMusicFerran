@@ -93,13 +93,13 @@ export const routes = [{
     {
 
         name: 'miperfil',
-        path: '/miperfil',
+        path: '/perfilUsuario',
         component: MiPerfil
     },
     {
 
         name: 'editarperfil',
-        path: '/editarperfil',
+        path: '/perfilUsuario/editarperfil',
         component: EditarPerfil
     },
     {

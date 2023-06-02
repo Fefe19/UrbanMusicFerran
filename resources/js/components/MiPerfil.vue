@@ -81,7 +81,7 @@ export default{
         return new Date(date).toLocaleString('es-ES', options);
       },
       eliminar(id) {
-    this.$axios.delete('/api/deleteUsuario/' + id)
+    this.$axios.delete('/api/perfilUsuario/delete/' + id)
       .then(response => {
 
         this.$axios.get('/api/usuarios')

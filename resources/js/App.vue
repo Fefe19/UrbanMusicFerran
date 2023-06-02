@@ -32,7 +32,7 @@
                                     <hr>    
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/miperfil" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra">Ver Mi Perfil</router-link>
+                                    <router-link to="/perfilUsuario" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra">Ver Mi Perfil</router-link>
                                 </li>
                                 <li class="nav-item">
                                     <router-link to="/cancionesAdmin" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Canciones</router-link>
@@ -60,7 +60,7 @@
                                     <hr>    
                                 </li>
                                 <li class="nav-item">
-                                    <router-link to="/miperfil" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra">Ver Mi Perfil</router-link>
+                                    <router-link to="/perfilUsuario" class="nav-item nav-link mt-1 ms-3 fw-bold tamaño_letra">Ver Mi Perfil</router-link>
                                 </li>
                                 <li class="nav-item">
                                     <router-link to="/cancionesAdmin" class="nav-item nav-link mt-1 ms-3 mb-2 fw-bold tamaño_letra" v-if="hasUserRole('accederAdmin')">Administrador Canciones</router-link>
@@ -159,7 +159,7 @@
     },
     created() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/carrito')
+            this.$axios.get('/api/productos/carrito')
                 .then(response => {
                     this.productos = response.data;
                     console.log(response.data);
