@@ -125,6 +125,7 @@ class UserController extends Controller
                 return response()->json($usuarios);
             }
         }
+        return response()->json(['mensaje' => 'No tienes permiso para ver los usuarios'], 403);
 }
 
 public function deleteUsuarioAdmin($id)
@@ -141,6 +142,8 @@ public function deleteUsuarioAdmin($id)
                 return response()->json(['success'=> 'Usuario eliminado correctamente']);
             }
         }
+
+        return response()->json(['mensaje' => 'No tienes permiso para eliminar usuarios'], 403);
     }
 
     public function agregarUsuariosAdmin(Request $request){
@@ -170,6 +173,8 @@ public function deleteUsuarioAdmin($id)
             }
         }
 
+        return response()->json(['mensaje' => 'No tienes permiso para agregar usuarios'], 403);
+
     }
 
     public function editarUsuariosAdmin($id, Request $request)
@@ -196,6 +201,7 @@ public function deleteUsuarioAdmin($id)
 
             }
         }
+        return response()->json(['mensaje' => 'No tienes permiso para editar usuarios'], 403);
 }
 
     public function editUserAdmin($id)

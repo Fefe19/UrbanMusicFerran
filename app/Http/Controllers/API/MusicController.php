@@ -26,6 +26,8 @@ class MusicController extends Controller
                 return response()->json($canciones);
             }
         }
+
+        return response()->json(['error' => 'No tienes permiso para ver las canciones'], 403);
     }
     
     public function canciones_categoria()
@@ -77,7 +79,7 @@ class MusicController extends Controller
                 return response()->json(['success' => 'Canción creada correctamente']);
             }
         }
-                return response()->json(['error' => 'No tienes permiso para añadir la canción']);
+            return response()->json(['error' => 'No tienes permiso para añadir la canción'], 403);
     }
 
     public function delete($id)
@@ -95,7 +97,7 @@ class MusicController extends Controller
             }
         }
     
-        return response()->json(['error' => 'No tienes permiso para eliminar la canción']);
+        return response()->json(['error' => 'No tienes permiso para eliminar la canción'], 403);
     }
 
 public function edit($id)
@@ -151,7 +153,7 @@ public function update($id, Request $request){
             }
         }
 
-        return response()->json(['error'=> 'No tienes permiso para actualizar la canción']);
+        return response()->json(['error'=> 'No tienes permiso para actualizar la canción'], 403);
     }
  
 }

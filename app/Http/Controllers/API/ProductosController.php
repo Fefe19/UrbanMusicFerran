@@ -23,6 +23,9 @@ class ProductosController extends Controller
                 return response()->json($productos);
             }
         }
+
+        return response()->json(['error' => 'No tienes permiso para ver los productos'], 403);
+
     }
 
     public function categoria()
@@ -57,7 +60,7 @@ class ProductosController extends Controller
     session(['productos' => $productosEnSesion]);
 
     // Devuelve una respuesta HTTP exitosa
-    return response()->json(['mensaje' => 'Productos agregados correctamente']);
+    return response()->json(['mensaje' => 'Productos agregados correctamente'], 403);
 }
 
     
@@ -173,6 +176,7 @@ public function agregarProductos(Request $request){
                 return response()->json(['success' => 'Producto creado correctamente.']);
             }
         }
+        return response()->json(['mensaje' => 'No tienes permiso para agregar productos'], 403);
     }
 
 public function delete($id)
@@ -198,6 +202,7 @@ public function edit($id)
                 return response()->json($producto);
             }
         }
+
 }
 
 public function update($id, Request $request)
@@ -231,6 +236,7 @@ public function update($id, Request $request)
             return response()->json(['success'=> 'Producto actualizado correctamente']);
         }
     }
+    return response()->json(['mensaje' => 'No tienes permiso para actualizarproductos'], 403);
 }
 
 }
