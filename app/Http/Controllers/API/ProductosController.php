@@ -13,9 +13,16 @@ class ProductosController extends Controller
 {
     
     public function productos()
-    {
-        $productos = Producto::all()->toArray();
-        return response()->json($productos);
+    {   
+        $user = auth()->user();
+
+        foreach ($user->roles as $role) {
+            if ($role->rol === 'accederAdmin') {
+
+                $productos = Producto::all()->toArray();
+                return response()->json($productos);
+            }
+        }
     }
 
     public function categoria()
@@ -139,65 +146,91 @@ return response()->json($response);
 
 public function agregarProductos(Request $request){
 
-    $request->validate([
-        'name'=> 'required',
-        'precio' => 'required',
-        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        'id_categoria' => 'required',
-    ]);
+    $user = auth()->user();
 
-    $input = $request->all();
-    $imageName = NULL;
+        foreach ($user->roles as $role) {
+            if ($role->rol === 'añadir') {
 
-    if($image = $request->file('file')){
-        $destinationPath = 'img/Merchandising/';
-        $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-        $image->move($destinationPath, $imageName);
-        $input['image'] = $imageName;
+                $request->validate([
+                    'name'=> 'required',
+                    'precio' => 'required',
+                    'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                    'id_categoria' => 'required',
+                ]);
+            
+                $input = $request->all();
+                $imageName = NULL;
+            
+                if($image = $request->file('file')){
+                    $destinationPath = 'img/Merchandising/';
+                    $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                    $image->move($destinationPath, $imageName);
+                    $input['image'] = $imageName;
+                }
+            
+                Producto::create($input);
+            
+                return response()->json(['success' => 'Producto creado correctamente.']);
+            }
+        }
     }
-
-    Producto::create($input);
-
-    return response()->json(['success' => 'Producto creado correctamente.']);
-
-}
 
 public function delete($id)
 {
-   $producto = Producto::find($id);
-   $producto->delete();
-   return response()->json(['success'=> 'Producto eliminado correctamente.']);
+    $user = auth()->user();
+    
+        foreach ($user->roles as $role) {
+            if ($role->rol === 'eliminar') {
+                $producto = Producto::find($id);
+                $producto->delete();
+                return response()->json(['success'=> 'Producto eliminado correctamente.']);
+            }
+        }
 }
 
 public function edit($id)
 {
-   $producto = Producto::find($id);
-   return response()->json($producto);
+    $user = auth()->user();
+    
+        foreach ($user->roles as $role) {
+            if ($role->rol === 'edit') {
+                $producto = Producto::find($id);
+                return response()->json($producto);
+            }
+        }
 }
 
 public function update($id, Request $request)
 {
-   $producto = Producto::find($id);
-   $request->validate([
-       'name' => 'required',
-       'precio' => 'required',
-       'id_categoria' => 'required'
-   ]);
 
-   $input = $request->all();
-   $imageName = NULL;
-
-   if ($image = $request->file('file')) {
-       $destinationPath = 'img/Merchandising';
-       $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
-       $image->move($destinationPath, $imageName);
-       $input['image'] = $imageName;
-       
-   }
-
-   $producto->update($input);
-
-   return response()->json(['success'=> 'Producto actualizado correctamente']);
+    $user = auth()->user();
+    
+        foreach ($user->roles as $role) {
+            if ($role->rol === 'edit') {
+    
+            $producto = Producto::find($id);
+            $request->validate([
+                'name' => 'required',
+                'precio' => 'required',
+                'id_categoria' => 'required'
+            ]);
+        
+            $input = $request->all();
+            $imageName = NULL;
+        
+            if ($image = $request->file('file')) {
+                $destinationPath = 'img/Merchandising';
+                $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $imageName);
+                $input['image'] = $imageName;
+                
+            }
+        
+            $producto->update($input);
+        
+            return response()->json(['success'=> 'Producto actualizado correctamente']);
+        }
+    }
 }
 
 }

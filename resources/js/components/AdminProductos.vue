@@ -134,7 +134,7 @@ methods: {
   } else {
     let canAccesUser = false;
 
-    // Bucle para comprobar si existe el rol 'editar' 'eliminar' o 'añadir'
+    // Bucle para comprobar si existe el rol 
     for (let role of window.Laravel.user.roles) {
       if (role.rol === 'accederAdmin') {
         canAccesUser = true;

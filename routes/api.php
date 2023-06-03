@@ -1,8 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\UserController;
-use App\Http\Controllers\API\PostController;
-use App\Http\Controllers\API\QuevedoMusicController;
+use App\Http\Controllers\API\MusicController;
 use App\Http\Controllers\API\ProductosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,13 +22,12 @@ Route::post('register',[UserController::class,'register']);
 Route::post('logout',[UserController::class,'logout'])->middleware(['auth:sanctum']);
 
 //Categoria de canciones
-Route::get('canciones_categoria', [QuevedoMusicController::class, 'canciones_categoria']);
-Route::get('/canciones_categoria/{id_categoria}', [QuevedoMusicController::class, 'getCancionesByCategoria']);
+Route::get('canciones_categoria', [MusicController::class, 'canciones_categoria']);
+Route::get('/canciones_categoria/{id_categoria}', [MusicController::class, 'getCancionesByCategoria']);
 
 //Categoria de productos
 Route::get('categoria', [ProductosController::class, 'categoria']);
 Route::get('/categoria/{id_categoria}', [ProductosController::class, 'getProductosByCategoria']);
-
 
 //Carrito 
 Route::group(['prefix' => 'productos', 'middleware' => 'auth:sanctum'], function () {
@@ -51,11 +49,11 @@ Route::group(['prefix' => 'perfilUsuario', 'middleware' => 'auth:sanctum'], func
 //Página canciones administrador
 Route::group(['prefix' => 'cancionesAdmin', 'middleware' => 'auth:sanctum'], function () {
 
-    Route::get('/', [QuevedoMusicController::class, 'canciones']);
-    Route::post('add', [QuevedoMusicController::class, 'agregarCanciones']);
-    Route::delete('delete/{id}', [QuevedoMusicController::class,'delete']);
-    Route::post('update/{id}', [QuevedoMusicController::class,'update']);
-    Route::get('edit/{id}', [QuevedoMusicController::class,'edit']);
+    Route::get('/', [MusicController::class, 'canciones']);
+    Route::post('add', [MusicController::class, 'agregarCanciones']);
+    Route::delete('delete/{id}', [MusicController::class,'delete']);
+    Route::post('update/{id}', [MusicController::class,'update']);
+    Route::get('edit/{id}', [MusicController::class,'edit']);
    
 });
 
@@ -69,6 +67,8 @@ Route::group(['prefix' => 'productosAdmin', 'middleware' => 'auth:sanctum'], fun
     Route::get('edit/{id}', [ProductosController::class, 'edit']);
 
 });
+
+
 
 //Página usuario administrador
 Route::group(['prefix' => 'userAdmin', 'middleware' => 'auth:sanctum'], function () {

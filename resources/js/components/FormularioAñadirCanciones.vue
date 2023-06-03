@@ -120,36 +120,38 @@ export default {
           }
       },
       /*Inicio*/
-      addCancion(e) {
-          this.$axios.get('/sanctum/csrf-cookie').then(response => {
-              let existObj = this;
-              const config = {
-                  headers:{
-                      'content-type': 'multipart/form-data'
-                  }
-              }
-
-              const formData = new FormData();
-              formData.append('name', this.name);
-              formData.append('audio', this.audio);
-              formData.append('file', this.img);
-              formData.append('id_categoria_cancion', this.id_categoria);
-
-
-              this.$axios.post('/api/cancionesAdmin/add', formData, config)
-                  .then(response => {
-                      existObj.strError = "";
-                      existObj.strSuccess = response.data.success;
-                      }
-                  )
-                  .catch(function (error){
-                      existObj.strError = error.response.data.message;
-                      existObj.strSuccess = "";
-                      }
-                  );
-          });
-      },
-      beforeRouteEnter(to, from, next) {
+addCancion(e) {
+  e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+  
+  this.$axios.get('/sanctum/csrf-cookie').then(response => {
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    };
+    
+    const formData = new FormData();
+    formData.append('name', this.name);
+    formData.append('audio', this.audio);
+    formData.append('file', this.img);
+    formData.append('id_categoria_cancion', this.id_categoria);
+    
+    this.$axios.post('/api/cancionesAdmin/add', formData, config)
+      .then(response => {
+        if (response.data.success) {
+          this.strSuccess = response.data.success;
+        } else {
+          this.strError = response.data.error;
+        }
+      })
+      .catch(error => {
+        this.strError = error.response.data.message;
+        this.strSuccess = '';
+      });
+  });
+    }
+},
+    beforeRouteEnter(to, from, next) {
   if (!window.Laravel.isLoggedin) {
     window.location.href = "/";
   } else {
@@ -159,6 +161,7 @@ export default {
     for (let role of window.Laravel.user.roles) {
       if (role.rol === 'añadir') {
         canAdd = true;
+        break;
       }
 
     }
@@ -171,7 +174,6 @@ export default {
   }
 }
 
-  }
 }
 
 

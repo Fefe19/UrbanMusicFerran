@@ -2,12 +2,22 @@
   <div class="container-fluid mt-5 mb-5">
     <h3 class="mb-4">Administrador de Canciones</h3>
     <div class="card card-default d-flex px-5 py-5">
+      <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <strong>{{strSuccess}}</strong>
+              </div>
+  
+              <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <strong>{{strError}}</strong>
+              </div>
       <div class=" p-1">
+
         <div class="d-flex justify-content-between pb-2 mb-2">
           <h5 class="card-title mt-2">Listado Canciones Disponibles</h5>
           <div>
           <router-link :to="{name: 'formularioañadircanciones'}" class="nav-item nav-link mb-4">
-            <div class="añadir mt-2" aria-label="añadir" v-if="hasUserRole('añadir')"></div>
+            <div class="añadir mt-2" aria-label="añadir" ></div>
           </router-link>
         </div>
       </div>
@@ -40,8 +50,8 @@
                         <div class="editar" aria-label="editar"></div>
                       </router-link>
                     </div>
-                    <div v-if="hasUserRole('eliminar')" class="d-flex align-items-center">
-                      <div class="eliminar mx-2" @click="eliminarCancion(cancion.id)"></div>
+                    <div  class="d-flex align-items-center">
+                      <div v-if="hasUserRole('eliminar')" class="eliminar mx-2" @click="eliminarCancion(cancion.id)"></div>
                     </div>
                   </div>
                 </td>
@@ -104,22 +114,26 @@ export default {
 },
   methods: {
     eliminarCancion(id) {
-    this.$axios.delete('/api/cancionesAdmin/delete/' + id)
-      .then(response => {
-
-        this.$axios.get('/api/cancionesAdmin')
-          .then(response => {
-            this.canciones = response.data;
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        
-      })
-      .catch(error => {
-        
-      });
-  },hasUserRole(role) {
+  let existObj = this;
+  this.$axios
+    .delete('/api/cancionesAdmin/delete/' + id)
+    .then(response => {
+      existObj.strSuccess = response.data.success;
+      
+      this.$axios
+        .get('/api/cancionesAdmin')
+        .then(response => {
+          existObj.canciones = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    })
+    .catch(error => {
+      existObj.strError = error.response.data.error;
+      existObj.strSuccess = '';
+    });
+},hasUserRole(role) {
     if (this.user && this.user.roles) {
       return this.user.roles.some(userRole => userRole.rol === role);
     }
@@ -128,27 +142,7 @@ export default {
   
 
   },
-  beforeRouteEnter(to, from, next) {
-  if (!window.Laravel.isLoggedin) {
-    next('/'); // Redirigir al usuario a la página de inicio si no está logueado
-  } else {
-    let canAccessUser = false;
-
-    // Bucle para comprobar si existe el rol 'editar', 'eliminar' o 'añadir'
-    for (let role of window.Laravel.user.roles) {
-      if (role.rol === 'editar' || role.rol === 'eliminar' || role.rol === 'añadir') {
-        canAccessUser = true;
-        break; // Salir del bucle si se encuentra un rol válido
-      }
-    }
-
-    if (canAccessUser) {
-      next(); // Permitir el acceso a la página actual
-    } else {
-      next('/'); // Redirigir al usuario a la página de inicio si no tiene los roles adecuados
-    }
-  }
-}
+  
 }
 
 </script>
