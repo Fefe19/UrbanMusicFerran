@@ -197,7 +197,7 @@ public function edit($id)
     $user = auth()->user();
     
         foreach ($user->roles as $role) {
-            if ($role->rol === 'edit') {
+            if ($role->rol === 'editar') {
                 $producto = Producto::find($id);
                 return response()->json($producto);
             }
@@ -211,7 +211,7 @@ public function update($id, Request $request)
     $user = auth()->user();
     
         foreach ($user->roles as $role) {
-            if ($role->rol === 'edit') {
+            if ($role->rol === 'editar') {
     
             $producto = Producto::find($id);
             $request->validate([

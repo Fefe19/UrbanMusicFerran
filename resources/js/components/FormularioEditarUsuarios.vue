@@ -113,7 +113,7 @@
                 });
                  this.$axios.post(`/api/userAdmin/update/${this.$route.params.id}`, formData, config)
                      .then(response => {
-                         existingObj.strError = "";
+                         existingObj.strError = error.response.data.message;
                          existingObj.strSuccess = response.data.success;
                      })
                      .catch(function(error) {

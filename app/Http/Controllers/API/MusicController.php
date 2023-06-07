@@ -10,11 +10,6 @@ use App\Models\Categoria_Canciones;
 class MusicController extends Controller
 {
 
-    public function pagina_principal()
-    {
-        // Lógica para mostrar la página principal
-        return view('home');
-    }
     public function canciones()
     {
         $user = auth()->user();
@@ -105,7 +100,7 @@ public function edit($id)
     $user = auth()->user();
     
         foreach ($user->roles as $role) {
-            if ($role->rol === 'edit') {
+            if ($role->rol === 'editar') {
 
                 $cancion = Canciones::find($id);
                 return response()->json($cancion);
@@ -118,7 +113,7 @@ public function update($id, Request $request){
     $user = auth()->user();
     
         foreach ($user->roles as $role) {
-            if ($role->rol === 'edit') {
+            if ($role->rol === 'editar') {
 
                 $cancion = Canciones::find($id);
                 $request->validate([

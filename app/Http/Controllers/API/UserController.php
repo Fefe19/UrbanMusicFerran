@@ -177,12 +177,12 @@ public function deleteUsuarioAdmin($id)
 
     }
 
-    public function editarUsuariosAdmin($id, Request $request)
-{
+    public function editarUsuariosAdmin($id, Request $request){
     $user = auth()->user();
     
         foreach ($user->roles as $role) {
-            if ($role->rol === 'edit') {
+            if ($role->rol === 'editar') {
+
                 $user = User::find($id);
                 $request->validate([
                     'name' => 'required',
@@ -209,7 +209,7 @@ public function deleteUsuarioAdmin($id)
         $user = auth()->user();
     
         foreach ($user->roles as $role) {
-            if ($role->rol === 'edit') {
+            if ($role->rol === 'editar') {
                 $user = User::find($id);
                 return response()->json($user);
             }
