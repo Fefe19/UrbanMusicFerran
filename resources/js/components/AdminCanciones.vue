@@ -86,22 +86,33 @@ export default {
   },
   
   created() {
-        if(window.Laravel.isLoggedin){
-            this.isLoggedin =true;
-            this.user =window.Laravel.user;
-        }
-        
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/cancionesAdmin')
-                .then(response => {
-                    this.canciones = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+    if (window.Laravel.isLoggedin) {
+      this.isLoggedin = true;
+      this.user = window.Laravel.user;
+    }
+
+    this.$axios
+      .get('/sanctum/csrf-cookie')
+      .then(() => {
+        this.$axios
+          .get('/api/cancionesAdmin')
+          .then(response => {
+            this.canciones = response.data;
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 403) {
+              this.strError = 'No tienes permiso para ver las canciones';
+            } else {
+              this.strError = 'Ocurrió un error al cargar las canciones';
             }
-        );
-    },computed: {
+            console.log(error);
+          });
+      })
+      .catch(error => {
+        this.strError = 'Error al obtener el token CSRF';
+        console.log(error);
+      });
+  },computed: {
   productosFiltrados() {
     if (this.busqueda.trim() === '') {
       return this.canciones;

@@ -2,6 +2,15 @@
   <div class="container-fluid mt-5 mb-5">
     <h3 class="mb-4">Administrador de Productos</h3>
     <div class="card card-default d-flex px-5 py-5">
+      <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <strong>{{strSuccess}}</strong>
+              </div>
+  
+              <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  <strong>{{strError}}</strong>
+              </div>
       <div class="p-1">
         <div class="d-flex justify-content-between pb-2 mb-2">
           <h5 class="card-title mt-2">Listado Productos Disponibles</h5>
@@ -71,21 +80,32 @@ data() {
         
     }
 },created() {
-        if(window.Laravel.isLoggedin){
-            this.isLoggedin =true;
-            this.user =window.Laravel.user;
-        }
+    if (window.Laravel.isLoggedin) {
+      this.isLoggedin = true;
+      this.user = window.Laravel.user;
+    }
 
-      this.$axios.get('/sanctum/csrf-cookie').then(response => {
-          this.$axios.get('/api/productosAdmin')
-              .then(response => {
-                  this.productos = response.data;
-              })
-              .catch(function (error) {
-                  console.log(error);
-              });
-          }
-      );
+    this.$axios
+      .get('/sanctum/csrf-cookie')
+      .then(() => {
+        this.$axios
+          .get('/api/productosAdmin')
+          .then(response => {
+            this.productos = response.data;
+          })
+          .catch(error => {
+            if (error.response && error.response.status === 403) {
+              this.strError = 'No tienes permiso para ver los productos';
+            } else {
+              this.strError = 'Ocurrió un error al cargar los productos';
+            }
+            console.log(error);
+          });
+      })
+      .catch(error => {
+        this.strError = 'Error al obtener el token CSRF';
+        console.log(error);
+      });
   },computed: {
   productosFiltrados() {
     if (this.busqueda.trim() === '') {
