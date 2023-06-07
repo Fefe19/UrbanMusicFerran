@@ -141,7 +141,27 @@ export default {
   }
   
 
-  },
+  }, beforeRouteEnter(to, from, next) {
+  if (!window.Laravel.isLoggedin) {
+    window.location.href = "/";
+  } else {
+    let canAccesUser = false;
+
+    // Bucle para comprobar si existe el rol 
+    for (let role of window.Laravel.user.roles) {
+      if (role.rol === 'accederAdmin') {
+        canAccesUser = true;
+      }
+
+    }
+
+    if (canAccesUser) {
+      next();
+    } else {
+      next('/');
+    }
+  }
+}
   
 }
 
